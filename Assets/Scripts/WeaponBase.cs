@@ -26,6 +26,7 @@ public class WeaponBase : MonoBehaviour
 
     [SerializeField] private float ReloadTime = 3f;
     [SerializeField] private float ReloadTimeLeft = 0;
+    [SerializeField] private BulletBase BulletPrefab;
 
     private bool CanFire => NextFireTimeLeft <= 0f && !Magazine.IsEmpty && ReloadTimeLeft < 0f;
     public void Update()
