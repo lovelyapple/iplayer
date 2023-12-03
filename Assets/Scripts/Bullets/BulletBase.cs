@@ -10,9 +10,10 @@ public class BulletBase : MonoBehaviour
     private BattleTeam _ownerTeam;
     private bool _isAlive = false;
 
-    public void InitializeBullet(Vector3 targetPos, BattleTeam ownerTeam, float speedAdd = 0)
+    public void InitializeBullet(Vector3 startPos, Vector3 targetPos, BattleTeam ownerTeam, float speedAdd = 0)
     {
-       transform.LookAt(targetPos);
+        transform.position = startPos;
+        transform.LookAt(targetPos);
         _speed = GameConstantDefine.BulletBaseSpeed + speedAdd;
         _lifeTime = GameConstantDefine.BulletLifeTime;
         _ownerTeam = ownerTeam;
@@ -27,7 +28,7 @@ public class BulletBase : MonoBehaviour
         }
         
         _lifeTime -= Time.deltaTime;
-        transform.position = transform.forward * _speed * Time.deltaTime;
+        transform.position += transform.forward * _speed * Time.deltaTime;
 
         if (_lifeTime <= 0)
         {

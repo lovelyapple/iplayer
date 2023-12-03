@@ -29,7 +29,8 @@ public class BulletPool : MonoBehaviour
         BulletPoolsRequest.Add(bulletBase);
     }
 
-    public BulletBase PickOne()
+    // TODO 個々の辺はBulletの種類によって分かれて管理する
+    public BulletBase PickOne(BulletBase prefab)
     {
         if (BulletPools.Any())
         {
@@ -38,6 +39,6 @@ public class BulletPool : MonoBehaviour
             return bullet;
         }
 
-        return null;
+        return GameObject.Instantiate(prefab.gameObject).GetComponent<BulletBase>();
     }
 }

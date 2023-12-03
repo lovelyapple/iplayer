@@ -8,6 +8,7 @@ public class AimController : MonoBehaviour
     [SerializeField] private float FirePosHeight = 1.5f;
 
     [SerializeField] private float FirePosFront = 0.5f;
+    [SerializeField] private Transform FireForwadPosTra;
 
     // とりあえずこの辺は発射の位置の初期化だけしとく
     public void Initialize(Transform characterModelTran)
@@ -20,5 +21,10 @@ public class AimController : MonoBehaviour
         };
         
         transform.SetParent(characterModelTran);
+    }
+
+    public Vector2 GetTarget()
+    {
+        return FireForwadPosTra.position;
     }
 }
