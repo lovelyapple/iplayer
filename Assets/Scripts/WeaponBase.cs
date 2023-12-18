@@ -7,7 +7,7 @@ public class Magazine
 {
     public int MaxMag;
     public int CurrentMag;
-    public bool IsEmpty => CurrentMag > 0;
+    public bool IsEmpty => CurrentMag <= 0;
     public void DecreaseMag()
     {
         if (IsEmpty)
@@ -16,6 +16,11 @@ public class Magazine
         }
         
         CurrentMag--;
+    }
+
+    public void OnFinishReload()
+    {
+        CurrentMag = MaxMag;
     }
 }
 public class WeaponBase : MonoBehaviour
@@ -33,6 +38,7 @@ public class WeaponBase : MonoBehaviour
     public void Initialize(AimController aimController)
     {
         _aimController = aimController;
+        Magazine.OnFinishReload();
     }
     public void Update() 
     {
@@ -44,6 +50,11 @@ public class WeaponBase : MonoBehaviour
         if (ReloadTimeLeft > 0)
         {
             ReloadTimeLeft -= Time.deltaTime;
+
+            if (ReloadTimeLeft <= 0)
+            {
+                Magazine.OnFinishReload();
+            }
         }
     }
 
@@ -61,7 +72,7 @@ public class WeaponBase : MonoBehaviour
         
         if (Magazine.IsEmpty)
         {
-            ReloadTime += ReloadTime;
+            ReloadTimeLeft += ReloadTime;
         }
 
         NextFireTimeLeft += FireRate;

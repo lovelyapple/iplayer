@@ -9389,7 +9389,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Magazine:
-    MaxMag: 0
+    MaxMag: 5
     CurrentMag: 0
   FireRate: 1
   NextFireTimeLeft: 0

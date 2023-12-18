@@ -8,6 +8,6 @@ public enum BattleTeam
 }
 public static class GameConstantDefine
 {
-    public const float BulletLifeTime = 10f;
-    public const float BulletBaseSpeed = 1f;
+    public const float BulletLifeTime = 2f;
+    public const float BulletBaseSpeed = 10f;
 }

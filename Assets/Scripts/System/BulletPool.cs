@@ -26,6 +26,7 @@ public class BulletPool : MonoBehaviour
 
     public void AddToPools(BulletBase bulletBase)
     {
+        bulletBase.gameObject.SetActive(false);
         BulletPoolsRequest.Add(bulletBase);
     }
 
@@ -36,6 +37,7 @@ public class BulletPool : MonoBehaviour
         {
             var bullet = BulletPools.First();
             BulletPools.Remove(bullet);
+            bullet.gameObject.SetActive(true);
             return bullet;
         }
 
