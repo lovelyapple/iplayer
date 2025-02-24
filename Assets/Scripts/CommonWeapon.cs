@@ -1,12 +1,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 /// <summary>
 /// なるべくメソッドの中に他のパラメータの状態を見ないでほしい
 /// </summary>
-public class CommonWeaponController : IWeaponController
+public class CommonWeapon : IWeapon
 {
     public WeaponFireMode CurrentFireMode;
     public WeaponData WeaponData { get; set; }
@@ -17,9 +18,13 @@ public class CommonWeaponController : IWeaponController
     public DateTime NextRateTime { get; set; }
     public bool IsCycling { get; set; }
     private const int SemiAutoCost = 3;
-    public CommonWeaponController(WeaponData weaponData)
+    FirePosition _firePositionTran;
+    public CommonWeapon(WeaponData weaponData, FirePosition firePosition)
     {
         WeaponData = weaponData;
+        CurrentMagazine = weaponData.MaxMagazine;
+        _firePositionTran = firePosition;
+        CurrentFireMode = weaponData.WeaponFireModes.First();
     }
     public bool CanFireRate()
     {
@@ -39,6 +44,9 @@ public class CommonWeaponController : IWeaponController
 
             var now = DateTime.Now;
             NextRateTime = now.AddMilliseconds(WeaponData.FireRateMilSec);
+
+            var bullet = BulletManager.CreateBullet();
+            bullet.Init(_firePositionTran.transform.position, _firePositionTran.transform.forward);
         }
         else
         {

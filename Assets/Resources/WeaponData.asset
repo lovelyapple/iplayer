@@ -12,4 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb1e5d64a1060478b84285b1a43f6eca, type: 3}
   m_Name: WeaponData
   m_EditorClassIdentifier: 
-  WeaponDatas: []
+  WeaponDatas:
+  - Code: 0
+    Name: DebugPistol
+    Damage: 10
+    Range: 100
+    FireRateMilSec: 100
+    Accuracy: 1
+    MaxMagazine: 10
+    ReloadSpeedMilSec: 10000
+    WeaponFireModes: 02000000

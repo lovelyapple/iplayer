@@ -4,11 +4,17 @@ using UnityEngine;
 
 public class CommonBattleCharacter : MonoBehaviour, IBattleCharacter
 {
+    [SerializeField] Transform FirePositionTransform;
     public CommonBattleCharacter Target { get; set; }
-    public CommonWeaponController WeaponController { get; set; }
+    public FirePosition FirePosition { get; set; }
+    public CommonWeapon Weapon { get; set; }
+    private void Awake()
+    {
+        FirePosition = FirePositionTransform.gameObject.AddComponent<FirePosition>();
+    }
     public void Init(WeaponData weaponData)
     {
-        WeaponController = new CommonWeaponController(weaponData);
+        Weapon = new CommonWeapon(weaponData, FirePosition);
     }
     public void OnUpdate()
     {
@@ -24,22 +30,22 @@ public class CommonBattleCharacter : MonoBehaviour, IBattleCharacter
     }
     public void RequestFire()
     {
-        if (WeaponController.IsRequringReload)
+        if (Weapon.IsRequringReload)
         {
-            if (!WeaponController.IsReloading)
+            if (!Weapon.IsReloading)
             {
                 StartReload();
             }
         }
-        else if (!WeaponController.CanFireRate())
+        else if (!Weapon.CanFireRate())
         {
             return;
         }
 
-        WeaponController.OnFire();
+        Weapon.OnFire();
     }
     public void StartReload()
     {
-        WeaponController.StartReload();
+        Weapon.StartReload();
     }
 }

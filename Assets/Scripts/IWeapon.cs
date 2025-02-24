@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IWeaponController
+public interface IWeapon
 {
     public WeaponData WeaponData { get; set; }
     public int CurrentMagazine { get; set; }
